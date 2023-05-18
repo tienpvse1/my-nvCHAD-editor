@@ -142,6 +142,7 @@ local default_plugins = {
     end,
   },
 
+
   {
     "neovim/nvim-lspconfig",
     init = function()
@@ -153,8 +154,11 @@ local default_plugins = {
     end,
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
+        dependencies = {
+         'jose-elias-alvarez/typescript.nvim',
+      },
        config = function()
-         require "custom.configs.null-ls"
+        require "custom.configs.null-ls"
        end,
     }
   },

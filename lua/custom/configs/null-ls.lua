@@ -17,6 +17,8 @@ local sources = {
    code_actions.refactoring,
    diagnostics.tsc,
    lint.shellcheck,
+   require("typescript.extensions.null-ls.code-actions"),
+
 }
 
 null_ls.setup {
