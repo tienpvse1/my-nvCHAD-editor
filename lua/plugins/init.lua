@@ -83,10 +83,10 @@ local default_plugins = {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = function()
-      return require ("plugins.configs.treesitter")
+      return require "plugins.configs.treesitter"
     end,
     dependencies = {
-      'p00f/nvim-ts-rainbow',
+      "p00f/nvim-ts-rainbow",
     },
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "syntax")
@@ -142,7 +142,6 @@ local default_plugins = {
     end,
   },
 
-
   {
     "neovim/nvim-lspconfig",
     init = function()
@@ -154,13 +153,13 @@ local default_plugins = {
     end,
     dependencies = {
       "jose-elias-alvarez/null-ls.nvim",
-        dependencies = {
-         'jose-elias-alvarez/typescript.nvim',
+      dependencies = {
+        "jose-elias-alvarez/typescript.nvim",
       },
-       config = function()
+      config = function()
         require "custom.configs.null-ls"
-       end,
-    }
+      end,
+    },
   },
 
   -- load luasnips + cmp related in insert mode only
