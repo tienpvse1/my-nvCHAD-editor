@@ -6,10 +6,12 @@ local formatting = null_ls.builtins.formatting
 local lint = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 local diagnostics = null_ls.builtins.diagnostics
+local filetypes = {"typescript", "javascript", "go", "typescriptreact","javascriptreact"}
 local sources = {
    formatting.prettier,
    formatting.stylua,
    formatting.gofmt,
+   diagnostics.misspell.with({filetypes}),
    code_actions.gomodifytags,
    code_actions.impl,
    code_actions.refactoring,
