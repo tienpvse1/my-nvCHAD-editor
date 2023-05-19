@@ -94,6 +94,16 @@ local default_plugins = {
     end,
   },
 
+  {
+    "windwp/nvim-ts-autotag",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    config = function ()
+      require('nvim-ts-autotag').setup()
+    end,
+    lazy = true,
+    event = "VeryLazy"
+
+  },
   -- git stuff
   {
     "lewis6991/gitsigns.nvim",
