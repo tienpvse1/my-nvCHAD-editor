@@ -2,7 +2,6 @@ require "core"
 
 vim.g.transparency = true
 local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
-
 if custom_init_path then
   dofile(custom_init_path)
 end
@@ -14,12 +13,11 @@ if not vim.loop.fs_stat(lazypath) then
   require("core.bootstrap").gen_chadrc_template()
   require("core.bootstrap").lazy(lazypath)
 end
-
-
 -- open nvim tree on startup
-vim.cmd([[
+vim.cmd [[
+  set relativenumber
   autocmd VimEnter * NvimTreeToggle
-]])
+]]
 
 dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)

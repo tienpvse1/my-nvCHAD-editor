@@ -3,6 +3,8 @@
 local default_plugins = {
 
   "nvim-lua/plenary.nvim",
+  "tpope/vim-rhubarb",
+  "tpope/vim-sleuth",
   -- nvchad plugins
   { "NvChad/extensions", branch = "v2.0" },
 
@@ -97,12 +99,11 @@ local default_plugins = {
   {
     "windwp/nvim-ts-autotag",
     dependencies = "nvim-treesitter/nvim-treesitter",
-    config = function ()
-      require('nvim-ts-autotag').setup()
+    config = function()
+      require("nvim-ts-autotag").setup()
     end,
     lazy = true,
-    event = "VeryLazy"
-
+    event = "VeryLazy",
   },
   -- git stuff
   {
