@@ -86,6 +86,7 @@ M.tabufline = {
     -- close buffer + hide terminal buffer
     ["<leader>x"] = {
       function()
+        vim.lsp.buf.format { async = true }
         vim.cmd[[ w ]]
         require("nvchad_ui.tabufline").close_buffer()
       end,
