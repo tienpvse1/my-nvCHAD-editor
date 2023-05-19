@@ -1,3 +1,7 @@
+<div align="center" width="100px">
+	<img width="50%" src="https://i.ytimg.com/vi/Ux5cQbO_ybw/maxresdefault.jpg" />	
+<div>
+
 <h1 align="center">NvChad</h1>
 
 <div align="center">
