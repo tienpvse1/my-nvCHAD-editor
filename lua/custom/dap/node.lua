@@ -1,9 +1,7 @@
+local dap = require "dap"
 
-local dap = require('dap')
-
-for _, language in ipairs({ "typescript", "javascript" }) do
-  dap.configurations[language] = {
-   {
+dap.configurations.javascript = {
+  {
     type = "pwa-node",
     request = "launch",
     name = "Launch file",
@@ -16,7 +14,27 @@ for _, language in ipairs({ "typescript", "javascript" }) do
     type = "pwa-node",
     request = "attach",
     name = "Attach",
-    processId = require'dap.utils'.pick_process,
+    processId = require("dap.utils").pick_process,
     cwd = "${workspaceFolder}",
-  }}
-end
+  },
+}
+
+dap.configurations.typescript = {
+  {
+    type = "pwa-node",
+    request = "launch",
+    name = "Launch file",
+    program = "${file}",
+    cwd = "${workspaceFolder}",
+    sourceMaps = true,
+    skipFiles = { "<node_internals>/**", "node_modules/**" },
+    runtimeExecutable = "ts-node"
+  },
+  {
+    type = "pwa-node",
+    request = "attach",
+    name = "Attach",
+    processId = require("dap.utils").pick_process,
+    cwd = "${workspaceFolder}",
+  },
+}
