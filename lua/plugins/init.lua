@@ -5,9 +5,70 @@ local default_plugins = {
   "nvim-lua/plenary.nvim",
   "tpope/vim-rhubarb",
   "tpope/vim-sleuth",
-  -- nvchad plugins
-  { "NvChad/extensions", branch = "v2.0" },
 
+  {
+    "microsoft/vscode-js-debug",
+    opts = true,
+    build = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+  },
+  -- nvchad plugins
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      require "custom.dap.go"
+    end,
+  },
+  {
+    "mxsdev/nvim-dap-vscode-js",
+    config = function()
+      require("dap-vscode-js").setup {
+        node_path = os.getenv "HOME" .. "/.nvm/versions/node/v18.15.0/bin/node",
+        debugger_path = os.getenv "HOME" .. "/vscode-js-debug/",
+        adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
+      }
+    end,
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    config = function()
+      require("nvim-dap-virtual-text").setup()
+    end,
+  },
+  { "NvChad/extensions", branch = "v2.0" },
+  {
+    "leoluz/nvim-dap-go",
+    config = function()
+      require("dap-go").setup {
+        dap_configurations = {
+          {
+            type = "go",
+            name = "Attach remote",
+            mode = "remote",
+            request = "attach",
+          },
+        },
+        delve = {
+          initialize_timeout_sec = 20,
+          port = "${port}",
+        },
+      }
+    end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    config = function()
+      require("dapui").setup()
+      vim.keymap.set("n", "<C-b>", function()
+        require("dapui").toggle()
+      end)
+    end,
+  },
+  {
+    "leoluz/nvim-dap-go",
+    config = function()
+      require("nvim-dap-go").setup()
+    end,
+  },
   {
     "NvChad/base46",
     branch = "v2.0",
@@ -154,6 +215,14 @@ local default_plugins = {
   },
 
   {
+    "jay-babu/mason-nvim-dap.nvim",
+    config = function()
+      require("mason-nvim-dap").setup {
+        ensure_installed = { "delve", "node2" },
+      }
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     init = function()
       require("core.utils").lazy_load "nvim-lspconfig"
@@ -282,6 +351,12 @@ local default_plugins = {
       require("which-key").setup(opts)
     end,
   },
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("neoscroll").setup {}
+    end,
+  },
 }
 
 local config = require("core.utils").load_config()
@@ -290,3 +365,5 @@ if #config.plugins > 0 then
   table.insert(default_plugins, { import = config.plugins })
 end
 require("lazy").setup(default_plugins, config.lazy_nvim)
+require "custom.dap.node"
+

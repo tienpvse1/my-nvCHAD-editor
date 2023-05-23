@@ -1,7 +1,7 @@
 ---@type ChadrcConfig
 local M = {}
 M.ui = {
-  theme = "onedark",
+  theme = "doomchad",
   theme_toggle = { "onedark", "doomchad" },
 }
 return M
