@@ -18,10 +18,16 @@ M.general = {
   n = {
     ["<Esc>"] = { ":noh <CR>", "Clear highlights" },
     -- switch between windows
-    ["<C-h>"] = { "<C-w>h", "Window left" },
-    ["<C-l>"] = { "<C-w>l", "Window right" },
-    ["<C-j>"] = { "<C-w>j", "Window down" },
-    ["<C-k>"] = { "<C-w>k", "Window up" },
+    ["<C-w>"] = {
+      function()
+        if vim.bo[vim.api.nvim_get_current_buf()].modified then
+          require "notify"("File modified, save before close it", "error")
+        else
+          require("nvchad_ui.tabufline").close_buffer()
+        end
+      end,
+      "Close tab",
+    },
 
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "Save file" },
@@ -85,9 +91,18 @@ M.tabufline = {
     -- close buffer + hide terminal buffer
     ["<leader>x"] = {
       function()
-        vim.lsp.buf.format { async = true }
-        vim.cmd[[ w ]]
-        require("nvchad_ui.tabufline").close_buffer()
+        if vim.bo[vim.api.nvim_get_current_buf()].modified then
+          require "notify"("File modified, save before close it", "error")
+        else
+          vim.lsp.buf.format { async = true }
+          require("nvchad_ui.tabufline").close_buffer()
+        end
+      end,
+      "Close buffer",
+    },
+    ["<leader><leader>x"] = {
+      function()
+        require("nvchad_ui.tabufline").closeAllBufs()
       end,
       "Close buffer",
     },

@@ -5,7 +5,16 @@ local default_plugins = {
   "nvim-lua/plenary.nvim",
   "tpope/vim-rhubarb",
   "tpope/vim-sleuth",
+  "rcarriga/nvim-notify",
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    event = "VimEnter",
+  },
 
+  {
+    "tpope/vim-dadbod",
+    event = "VimEnter",
+  },
   {
     "microsoft/vscode-js-debug",
     opts = true,
@@ -366,4 +375,3 @@ if #config.plugins > 0 then
 end
 require("lazy").setup(default_plugins, config.lazy_nvim)
 require "custom.dap.node"
-

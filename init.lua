@@ -17,7 +17,9 @@ end
 -- open nvim tree on startup
 vim.cmd [[
   set relativenumber
-  autocmd VimEnter * NvimTreeToggle
+  autocmd VimEnter * Nvdash
+  autocmd BufWritePre * lua vim.lsp.buf.format()
+  let g:db_ui_use_nerd_fonts = 1
 ]]
 
 dofile(vim.g.base46_cache .. "defaults")
